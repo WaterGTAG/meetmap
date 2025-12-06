@@ -1,0 +1,43 @@
+<body>
+    <div class="goal-image-container">
+        <img class="goal-image" id="goal-image" style="margin-left: calc(50% - 50px);" src="https://raw.githubusercontent.com/WaterGTAG/meetmap/refs/heads/main/assets/Untitled1553_20251205160238.webp">
+    </div>
+    <div class="goal-bar-container" style="background-color: #ffffff; border: 2px solid #006a35; border-radius: 50px; height: 50px; box-shadow: 0px 5px 0px #006a35;">
+  <div class="goal-bar" id="goal-bar" style="height: 100%; width: 50%; background-color: #00ffa5; border-radius: 50px 0px 0px 50px;"></div>
+</div>
+<div class="goal-numbers">
+    <p class="funds-reached" id="funds-reached">$0 USD</p><p class="funds-goal">of $600 reached</p>
+</div>
+</body>
+
+<style>
+    body {padding: 0; margin: 0;}
+    .goal-numbers {display: flex; justify-content: space-between; font-size: 30px; font-family: 'Rubik', sans-serif; margin-top: -20px;}
+    .goal-image {height: 100px; margin-bottom:-25px;}
+    .goal-bar-container {z-index: 1;}
+    /* Text Style */
+    .funds-goal {text-align: right;}
+    .funds-reached {font-weight: 700;}
+</style>
+
+<!-- JavaScript -->
+<script>
+    async function getFundsReached() {
+        const url = await fetch("https://raw.githubusercontent.com/WaterGTAG/meetmap/refs/heads/main/goal.txt");
+        const fundsReached = await url.text();
+        document.getElementById("funds-reached").innerHTML = "$" + fundsReached + " USD";
+
+        const fundsReachedPercent = (fundsReached / 6)
+        document.getElementById("goal-bar").style.width = fundsReachedPercent + "%";
+        document.getElementById("goal-image").style.marginLeft = "calc(" + fundsReachedPercent + "% - 50px)";
+
+        if (fundsReachedPercent < 10) {
+            document.getElementById("goal-image").style.marginLeft = "calc(10% - 50px)";
+        }
+        if (fundsReachedPercent > 90) {
+            document.getElementById("goal-image").style.marginLeft = "calc(90% - 50px)";
+            document.getElementById("goal-bar").style.borderRadius = "50px 50px 50px 50px";
+        }
+    }
+    getFundsReached();
+</script>
