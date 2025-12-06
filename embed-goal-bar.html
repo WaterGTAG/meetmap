@@ -38,10 +38,10 @@
         document.getElementById("goal-image").style.marginLeft = "calc(" + fundsReachedPercent + "% - 50px)";
 
         if (fundsReachedPercent < 10) {
-            document.getElementById("goal-image").style.marginLeft = "calc(10% - 50px)";
+            document.getElementById("goal-image").style.marginLeft = "calc(0% + 0px)";
         }
         if (fundsReachedPercent > 90) {
-            document.getElementById("goal-image").style.marginLeft = "calc(90% - 50px)";
+            document.getElementById("goal-image").style.marginLeft = "calc(100% - 100px)";
             document.getElementById("goal-bar").style.borderRadius = "50px 50px 50px 50px";
         }
     }
